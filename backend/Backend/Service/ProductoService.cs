@@ -24,8 +24,7 @@ namespace Backend.Service
             productoRepository.RemoveProducto(productoId);
         }
 
-        public ProductoResponseDto GetProducto(
-            int productoId) => productoRepository
+        public ProductoResponseDto GetProducto(int productoId) => productoRepository
             .GetProducto(productoId)
             .Adapt<ProductoResponseDto>();
 

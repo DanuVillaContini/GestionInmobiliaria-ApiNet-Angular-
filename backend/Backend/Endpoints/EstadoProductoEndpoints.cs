@@ -1,4 +1,5 @@
 ﻿using Backend.Database;
+using Backend.Service;
 using Carter;
 
 namespace Backend.Endpoints
@@ -7,16 +8,24 @@ namespace Backend.Endpoints
     {
         public void AddRoutes(IEndpointRouteBuilder routes)
         {
-            //var app = routes.MapGroup("/api/estadoProducto");
+            var app = routes.MapGroup("/api/estadoProducto");
 
-            //app.MapGet("/", (AppDbContext context) =>
-            //{
-            //    var estado = context.EstadoProductos.Select(p=> p)
+            //---GET---
+            app.MapGet("/", (IEstadoProductoService estadoProductoService) =>
+            {
+                var estados = estadoProductoService.GetEstados();
 
-            //    return Results.Ok(estado);
+                return Results.Ok(estados);
 
-            //}).WithTags("EstadoProducto");
+            }).WithTags("EstadoProducto");
 
+            //---GET-ID---
+            app.MapGet("/{estadoId:int}", (IEstadoProductoService estadoProductoService, int estadoId) =>
+            {
+                var estado = estadoProductoService.GetEstado(estadoId);
+
+                return Results.Ok(estado);
+            }).WithTags("EstadoProducto");
         }
     }
 }

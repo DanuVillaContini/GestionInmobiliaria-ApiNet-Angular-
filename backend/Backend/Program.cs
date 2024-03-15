@@ -23,6 +23,13 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddTransient<IProductoRepository, ProductoRepository>();
 builder.Services.AddScoped<IProductoService, ProductoService>();
 
+//ESTADO-PRODUCTO INYECTADO:
+builder.Services.AddTransient<IEstadoProductoRepository, EstadoProductoRepository>();
+builder.Services.AddScoped<IEstadoProductoService, EstadoProductoService>();
+
+////ESTADO-PRODUCTO INYECTADO:
+//builder.Services.AddTransient<IEstadoProductoRepository, EstadoProductoRepository>();
+//builder.Services.AddScoped<IEstadoProductoService, EstadoProductoService>();
 
 var app = builder.Build();
 app.UseHttpsRedirection();
