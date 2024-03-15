@@ -28,8 +28,8 @@ builder.Services.AddTransient<IEstadoProductoRepository, EstadoProductoRepositor
 builder.Services.AddScoped<IEstadoProductoService, EstadoProductoService>();
 
 ////ESTADO-PRODUCTO INYECTADO:
-//builder.Services.AddTransient<IEstadoProductoRepository, EstadoProductoRepository>();
-//builder.Services.AddScoped<IEstadoProductoService, EstadoProductoService>();
+builder.Services.AddTransient<IEstadoReservaRepository, EstadoReservaRepository>();
+builder.Services.AddScoped<IEstadoReservaService, EstadoReservaService>();
 
 var app = builder.Build();
 app.UseHttpsRedirection();

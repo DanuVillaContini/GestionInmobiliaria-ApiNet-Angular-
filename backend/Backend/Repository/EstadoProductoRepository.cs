@@ -1,6 +1,5 @@
 ﻿using Backend.Database;
 using Backend.Domain;
-using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Repository
 {
