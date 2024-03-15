@@ -10,9 +10,12 @@ namespace Backend.Domain
         //un barrio, el precio y un enlace a una imagen ilustrativa.
         [Key]
         public int ProductoId { get; set; }
+        [StringLength(10)]
         public string Codigo { get; set; }
+        [StringLength(30)]
         public string Barrio { get; set; }
         public decimal Precio { get; set; }
+        [StringLength(200)]
         public string? UrlImagen { get; set; }
 
     }

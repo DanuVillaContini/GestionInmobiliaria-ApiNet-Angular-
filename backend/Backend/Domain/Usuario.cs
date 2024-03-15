@@ -8,9 +8,12 @@ namespace Backend.Domain
     {
         [Key]
         public int UsuarioId { get; set; }
-        public string Nombre { get; set; }
+        [StringLength(30)]
+        public string NameUser { get; set; }
+        [StringLength(100)]
         public string Correo { get; set; }
+        [StringLength(15)]
         public string Contraseña { get; set; }
-        public string Rol { get; set; }
+        public bool EsVendedor { get; set; }
     }
 }

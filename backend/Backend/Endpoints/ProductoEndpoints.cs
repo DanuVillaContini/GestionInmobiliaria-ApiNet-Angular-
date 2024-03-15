@@ -1,7 +1,9 @@
 ﻿using Backend.Database;
 using Backend.Domain;
 using Backend.Endpoints.DTO;
+using Backend.Service;
 using Carter;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Endpoints
 {
@@ -10,66 +12,47 @@ namespace Backend.Endpoints
         public void AddRoutes(IEndpointRouteBuilder routes)
         {
             var app = routes.MapGroup("/api/Producto");
-
-            app.MapGet("/", (AppDbContext context) =>
+            //---GET---
+            app.MapGet("/", (IProductoService productoService) =>
             {
-                var productos = context.Productos.Select(p => p.ConvertToProductoDto());
+                var productos = productoService.GetProductos();
 
                 return Results.Ok(productos);
 
             }).WithTags("Producto");
 
-            app.MapGet("/{idProducto}", (AppDbContext context, int idProducto) =>
-            {
-                var productos = context.Productos.Where(p => p.ProductoId == idProducto).Select(p => p.ConvertToProductoDto());
 
-                return Results.Ok(productos);
+            //---GET-ID---
+            app.MapGet("/{productoId:int}", (IProductoService productoService, int productoId) =>
+            {
+                var producto = productoService.GetProducto(productoId);
+
+                return Results.Ok(producto);
             }).WithTags("Producto");
 
-            app.MapPost("/", (AppDbContext context, ProductoDto productoDto) =>
+
+            //---POST---
+            app.MapPost("/", ([FromServices] IProductoService productoService, [FromBody] ProductoRequestDto productoDto) =>
             {
-                Producto producto = new Producto
-                {
-                    Codigo = productoDto.Codigo,
-                    Barrio = productoDto.Barrio,
-                    Precio = productoDto.Precio,
-                    UrlImagen = productoDto.UrlImagen
-                };
-
-                context.Productos.Add(producto);
-
-                context.SaveChanges();
+                productoService.CreateProducto(productoDto);
 
                 return Results.Created();
             }).WithTags("Producto");
 
-            app.MapPut("/{idProducto}", (AppDbContext context, int idProducto, ProductoDto productoDto) =>
+
+            //---PUT---
+            app.MapPut("/{productoId}", ([FromServices] IProductoService productoService, int productoId, [FromBody] ProductoRequestDto productoDto) =>
             {
-                var producto = context.Productos.FirstOrDefault(p => p.ProductoId == idProducto);
-
-                if (producto is null)
-                    return Results.BadRequest();
-
-                producto.Codigo = productoDto.Codigo;
-                producto.Barrio = productoDto.Barrio;
-                producto.Precio = productoDto.Precio;
-                producto.UrlImagen = productoDto.UrlImagen;
-
-                context.SaveChanges();
+                productoService.UpdateProducto(productoId, productoDto);
 
                 return Results.Ok();
             }).WithTags("Producto");
 
-            app.MapDelete("/{idProducto}", (AppDbContext context, int idProducto) =>
+
+            //---DELETE---
+            app.MapDelete("/{productoId}", (IProductoService productoService, int productoId) =>
             {
-                var producto = context.Productos.FirstOrDefault(p => p.ProductoId == idProducto);
-
-                if (producto is null)
-                    return Results.BadRequest();
-
-                context.Productos.Remove(producto);
-
-                context.SaveChanges();
+                productoService.DeleteProducto(productoId);
 
                 return Results.NoContent();
             }).WithTags("Producto");

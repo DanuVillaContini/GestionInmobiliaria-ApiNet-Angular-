@@ -12,13 +12,11 @@ namespace Backend.Domain
         [ForeignKey("ProductoId")]
         public required Producto Producto { get; set; }
         [ForeignKey("UsuarioId")]
-        public required Usuario Usuario { get; set; }
-
+        public required Usuario UserVendedor { get; set; }
+        public required Usuario Cliente { get; set; }
 
         [ForeignKey("EstadoId")]
         public required EstadoReserva EstadoReserva { get; set; }
 
-        [ForeignKey("ItemId")]
-        public required ItemProducto ItemProducto { get; set; }
     }
 }

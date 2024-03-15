@@ -1,4 +1,6 @@
 using Backend.Database;
+using Backend.Repository;
+using Backend.Service;
 using Carter;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,6 +18,10 @@ builder.Services.AddCors(options => options.AddPolicy("Academia2024",
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(config.GetConnectionString("AppDb")));
+
+//PRODUCTO INYECTADO:
+builder.Services.AddTransient<IProductoRepository, ProductoRepository>();
+builder.Services.AddScoped<IProductoService, ProductoService>();
 
 
 var app = builder.Build();
