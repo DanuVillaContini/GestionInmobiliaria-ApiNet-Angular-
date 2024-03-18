@@ -1,1 +1,20 @@
 <h2>LOGIN</h2><hr>
+<form [formGroup]="myFormLogin" (ngSubmit)="login()">
+
+  <div>
+
+    <label for="username">Usuario</label>
+    <input type="text" id="username" name="username" formControlName="username">
+
+  </div>
+  <div>
+
+    <label for="username">Password</label>
+
+    <input type="password" name="password" formControlName="password">
+  </div>
+
+  <hr>
+  <button type="submit" class="button-submit">Login</button>
+  <button type="button" routerLink="/auth/register" class="button-submit">Registrarse</button>
+</form>

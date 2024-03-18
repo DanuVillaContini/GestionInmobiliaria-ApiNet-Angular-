@@ -1,0 +1,13 @@
+.button-submit {
+  padding: 10px;
+  color: rgb(244, 244, 250);
+  background-color: rgb(88, 88, 227);
+  border-radius: 20%;
+  margin-left: 10px;
+}
+
+input {
+  padding: 2%;
+  margin-left: 10px;
+  margin-top: 10px;
+}

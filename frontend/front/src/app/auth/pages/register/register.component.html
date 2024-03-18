@@ -1,1 +1,30 @@
 <h2>REGISTER</h2>
+<hr>
+<form [formGroup]="myFormRegister" (ngSubmit)="register()">
+  <div>
+    <label for="username">Usuario</label>
+    <input type="text" id="username" name="username" formControlName="username">
+  </div>
+
+  <div>
+    <label for="email">Correo</label>
+    <input type="email" name="email" formControlName="email">
+  </div>
+
+  <div>
+    <label for="password">Password</label>
+    <input type="password" name="password" formControlName="password">
+  </div>
+
+  <div>
+    <label for="typeUser">Tipo de Usuario</label>
+    <select name="typeUser" formControlName="esVendedor">
+      <option value="1">Vendedor</option>
+      <option value="0">Comerciante</option>
+    </select>
+  </div>
+
+  <hr>
+  <button type="submit" class="button-submit">Registrarse</button>
+  <button type="button" routerLink="/auth/login" class="button-submit">Ya tengo Cuenta</button>
+</form>
