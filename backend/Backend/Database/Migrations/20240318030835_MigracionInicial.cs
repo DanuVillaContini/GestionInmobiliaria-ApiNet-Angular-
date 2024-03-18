@@ -31,7 +31,7 @@ namespace Backend.Database.Migrations
                 {
                     EstadoId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Nombre = table.Column<string>(type: "TEXT", nullable: false)
+                    Nombre = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -78,7 +78,7 @@ namespace Backend.Database.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     ProductoId = table.Column<int>(type: "INTEGER", nullable: false),
                     UsuarioId = table.Column<int>(type: "INTEGER", nullable: false),
-                    ClienteUsuarioId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ClienteNombre = table.Column<string>(type: "TEXT", nullable: false),
                     EstadoId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -95,12 +95,6 @@ namespace Backend.Database.Migrations
                         column: x => x.ProductoId,
                         principalTable: "Producto",
                         principalColumn: "ProductoId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Reserva_Usuario_ClienteUsuarioId",
-                        column: x => x.ClienteUsuarioId,
-                        principalTable: "Usuario",
-                        principalColumn: "UsuarioId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Reserva_Usuario_UsuarioId",
@@ -145,11 +139,6 @@ namespace Backend.Database.Migrations
                 table: "Usuario",
                 columns: new[] { "UsuarioId", "Contraseña", "Correo", "EsVendedor", "NameUser" },
                 values: new object[] { 1, "userTEST1*", "user_test_1@example", true, "userTEST1" });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Reserva_ClienteUsuarioId",
-                table: "Reserva",
-                column: "ClienteUsuarioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reserva_EstadoId",

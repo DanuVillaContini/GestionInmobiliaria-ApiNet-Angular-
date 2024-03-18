@@ -9,6 +9,6 @@ namespace Backend.Domain
     {
         [Key]
         public int EstadoId { get; set; }
-        public string Nombre { get; set; }
+        public string? Nombre { get; set; }
     }
 }

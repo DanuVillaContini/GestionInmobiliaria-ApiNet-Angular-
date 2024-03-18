@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Database.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240313001554_MigracionInicial")]
+    [Migration("20240318030835_MigracionInicial")]
     partial class MigracionInicial
     {
         /// <inheritdoc />
@@ -58,7 +58,6 @@ namespace Backend.Database.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Nombre")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("EstadoId");
@@ -145,8 +144,9 @@ namespace Backend.Database.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("ClienteUsuarioId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("ClienteNombre")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("EstadoId")
                         .HasColumnType("INTEGER");
@@ -158,8 +158,6 @@ namespace Backend.Database.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("ReservaId");
-
-                    b.HasIndex("ClienteUsuarioId");
 
                     b.HasIndex("EstadoId");
 
@@ -211,12 +209,6 @@ namespace Backend.Database.Migrations
 
             modelBuilder.Entity("Backend.Domain.Reserva", b =>
                 {
-                    b.HasOne("Backend.Domain.Usuario", "Cliente")
-                        .WithMany()
-                        .HasForeignKey("ClienteUsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Backend.Domain.EstadoReserva", "EstadoReserva")
                         .WithMany()
                         .HasForeignKey("EstadoId")
@@ -229,19 +221,17 @@ namespace Backend.Database.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Backend.Domain.Usuario", "UserVendedor")
+                    b.HasOne("Backend.Domain.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Cliente");
-
                     b.Navigation("EstadoReserva");
 
                     b.Navigation("Producto");
 
-                    b.Navigation("UserVendedor");
+                    b.Navigation("Usuario");
                 });
 #pragma warning restore 612, 618
         }

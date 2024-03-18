@@ -6,8 +6,6 @@ namespace Backend.Domain
     [Table("Producto")]
     public class Producto
     {
-        //De cada producto se desea informar un código (alfanumérico),
-        //un barrio, el precio y un enlace a una imagen ilustrativa.
         [Key]
         public int ProductoId { get; set; }
         [StringLength(10)]

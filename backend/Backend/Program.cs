@@ -31,6 +31,11 @@ builder.Services.AddScoped<IEstadoProductoService, EstadoProductoService>();
 builder.Services.AddTransient<IEstadoReservaRepository, EstadoReservaRepository>();
 builder.Services.AddScoped<IEstadoReservaService, EstadoReservaService>();
 
+////RESERVAS INYECTADO:
+builder.Services.AddTransient<IReservaRepository, ReservaRespository>();
+builder.Services.AddScoped<IReservaService, ReservaService>();
+
+
 var app = builder.Build();
 app.UseHttpsRedirection();
 app.UseSwagger();
