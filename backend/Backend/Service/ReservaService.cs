@@ -18,21 +18,30 @@ public class ReservaService(IReservaRepository reservaRepository) : IReservaServ
 {
     public void AddNewReserva(ReservaRequestDto reservaDto)
     {
-        var nuevaReserva = reservaDto.Adapt<ReservaDto>();
-        reservaRepository.AddNewReserva(nuevaReserva);
+        if (reservaDto != null && !string.IsNullOrEmpty(reservaDto.Usuario))
+        {
+            var nuevaReserva = reservaDto.Adapt<ReservaDto>();
+            reservaRepository.AddNewReserva(nuevaReserva);
+        }
     }
 
-    public ReservaResponseDto GetReservaId(int reservaId) => reservaRepository
-        .GetReservaId(reservaId)
-        .Adapt<ReservaResponseDto>();
+
+    public ReservaResponseDto GetReservaId(int reservaId)
+    {
+        return reservaRepository.GetReservaId(reservaId).Adapt<ReservaResponseDto>();
+    }
 
     public List<ReservaResponseDto> GetReservas()
     {
-        return reservaRepository.GetReservas().Adapt<List<ReservaResponseDto>>();
+        var reservas = reservaRepository.GetReservas().Adapt<List<ReservaResponseDto>>();
+
+        return reservas;
     }
 
     public int UpdateEstadoReserva(int reservaId, ReservaRequestDto reservaDto)
     {
-        return reservaRepository.UpdateEstadoReserva(reservaId, reservaDto.Adapt<ReservaDto>());
+        var reservaDtoConverted = reservaDto.Adapt<ReservaDto>();
+        return reservaRepository.UpdateEstadoReserva(reservaId, reservaDtoConverted);
     }
+
 }

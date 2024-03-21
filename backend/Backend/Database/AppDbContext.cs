@@ -76,15 +76,24 @@ namespace Backend.Database
                     EstadoId = 4,
                     Nombre = "RECHAZADA"
                 });
-            modelBuilder.Entity<Usuario>().HasData(
-                new Usuario
-                {
-                    UsuarioId = 1,
-                    NameUser = "userTEST1",
-                    Correo = "user_test_1@example",
-                    Contraseña = "userTEST1*",
-                    EsVendedor = true
-                });
+            //modelBuilder.Entity<Usuario>().HasData(
+            //    new Usuario
+            //    {
+            //        UsuarioId = 1,
+            //        NameUser = "userTEST1",
+            //        Correo = "user_test_1@example",
+            //        Contraseña = "userTEST1*",
+            //        EsVendedor = true
+            //    },
+            //    new Usuario
+            //    {
+            //        UsuarioId = 2,
+            //        NameUser = "userTEST2",
+            //        Correo = "user_test_2@example",
+            //        Contraseña = "userTEST2*",
+            //        EsVendedor = false
+            //    });
+
         }
     }
 }

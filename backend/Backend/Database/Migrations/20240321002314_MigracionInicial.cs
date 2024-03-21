@@ -77,7 +77,7 @@ namespace Backend.Database.Migrations
                     ReservaId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     ProductoId = table.Column<int>(type: "INTEGER", nullable: false),
-                    UsuarioId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Usuario = table.Column<string>(type: "TEXT", nullable: false),
                     ClienteNombre = table.Column<string>(type: "TEXT", nullable: false),
                     EstadoId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
@@ -95,12 +95,6 @@ namespace Backend.Database.Migrations
                         column: x => x.ProductoId,
                         principalTable: "Producto",
                         principalColumn: "ProductoId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Reserva_Usuario_UsuarioId",
-                        column: x => x.UsuarioId,
-                        principalTable: "Usuario",
-                        principalColumn: "UsuarioId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -135,11 +129,6 @@ namespace Backend.Database.Migrations
                     { 3, "Oeste II", "PDVkL-0003", 35000000m, null }
                 });
 
-            migrationBuilder.InsertData(
-                table: "Usuario",
-                columns: new[] { "UsuarioId", "Contraseña", "Correo", "EsVendedor", "NameUser" },
-                values: new object[] { 1, "userTEST1*", "user_test_1@example", true, "userTEST1" });
-
             migrationBuilder.CreateIndex(
                 name: "IX_Reserva_EstadoId",
                 table: "Reserva",
@@ -149,11 +138,6 @@ namespace Backend.Database.Migrations
                 name: "IX_Reserva_ProductoId",
                 table: "Reserva",
                 column: "ProductoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Reserva_UsuarioId",
-                table: "Reserva",
-                column: "UsuarioId");
         }
 
         /// <inheritdoc />
@@ -166,13 +150,13 @@ namespace Backend.Database.Migrations
                 name: "Reserva");
 
             migrationBuilder.DropTable(
+                name: "Usuario");
+
+            migrationBuilder.DropTable(
                 name: "EstadoReserva");
 
             migrationBuilder.DropTable(
                 name: "Producto");
-
-            migrationBuilder.DropTable(
-                name: "Usuario");
         }
     }
 }

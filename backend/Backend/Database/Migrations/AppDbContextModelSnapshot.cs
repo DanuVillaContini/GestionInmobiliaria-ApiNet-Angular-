@@ -151,16 +151,15 @@ namespace Backend.Database.Migrations
                     b.Property<int>("ProductoId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("UsuarioId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Usuario")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.HasKey("ReservaId");
 
                     b.HasIndex("EstadoId");
 
                     b.HasIndex("ProductoId");
-
-                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Reserva");
                 });
@@ -192,16 +191,6 @@ namespace Backend.Database.Migrations
                     b.HasKey("UsuarioId");
 
                     b.ToTable("Usuario");
-
-                    b.HasData(
-                        new
-                        {
-                            UsuarioId = 1,
-                            Contraseña = "userTEST1*",
-                            Correo = "user_test_1@example",
-                            EsVendedor = true,
-                            NameUser = "userTEST1"
-                        });
                 });
 
             modelBuilder.Entity("Backend.Domain.Reserva", b =>
@@ -218,17 +207,9 @@ namespace Backend.Database.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Backend.Domain.Usuario", "Usuario")
-                        .WithMany()
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("EstadoReserva");
 
                     b.Navigation("Producto");
-
-                    b.Navigation("Usuario");
                 });
 #pragma warning restore 612, 618
         }

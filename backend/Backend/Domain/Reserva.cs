@@ -10,19 +10,19 @@ namespace Backend.Domain
         public int ReservaId { get; set; }
 
         //Producto
-        [ForeignKey("ProductoId")]
-        public required Producto Producto { get; set; }
-
+        [ForeignKey("Producto")]
+        public int ProductoId { get; set; }
+        public Producto Producto { get; set; }
         //Vendedor
-        [ForeignKey("UsuarioId")]
-        public required Usuario Usuario { get; set; }
+        public string Usuario { get; set; }
 
         //Datos CLiente:
         public string ClienteNombre { get; set; }
 
         //Estado Reserva
-        [ForeignKey("EstadoId")]
-        public required EstadoReserva EstadoReserva { get; set; }
+        [ForeignKey("EstadoReserva")]
+        public int EstadoId { get; set; }
+        public EstadoReserva EstadoReserva { get; set; }
 
     }
 }

@@ -21,9 +21,9 @@ namespace Backend.Endpoints
             }).WithTags("Reservas");
 
             //---GET-ID---
-            app.MapGet("/{reservaId:int}", (IReservaService reservaServicee, int reservaId) =>
+            app.MapGet("/{reservaId:int}", (IReservaService reservaService, int reservaId) =>
             {
-                var rID = reservaServicee.GetReservaId(reservaId);
+                var rID = reservaService.GetReservaId(reservaId);
 
                 return Results.Ok(rID);
             }).WithTags("Reservas");
