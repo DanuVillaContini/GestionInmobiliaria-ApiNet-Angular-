@@ -11,10 +11,11 @@ namespace Backend.Database
         public DbSet<Reserva> Reservas { get; set; }
         public DbSet<EstadoProducto> EstadoProductos { get; set; }
         public DbSet<EstadoReserva> EstadoReservas { get; set; }
-
+        public DbSet<Rol> Roles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            #region PRODUCTOS
             modelBuilder.Entity<Producto>().HasData(
                 new Producto
                 {
@@ -41,9 +42,12 @@ namespace Backend.Database
                     Precio = 35000000,
                     Estado = "DISPONIBLE"
 
-                }
-                );
-                modelBuilder.Entity<EstadoProducto>().HasData(
+                });
+            #endregion
+
+
+            #region ESTADOS PRODUCTOS
+            modelBuilder.Entity<EstadoProducto>().HasData(
                 new EstadoProducto
                 {
                     EstadoId = 1,
@@ -58,8 +62,12 @@ namespace Backend.Database
                 {
                     EstadoId = 3,
                     Nombre = "VENDIDO"
-                }); 
-                modelBuilder.Entity<EstadoReserva>().HasData(
+                });
+            #endregion
+
+
+            #region ESTADOS RESERVAS
+            modelBuilder.Entity<EstadoReserva>().HasData(
                 new EstadoProducto
                 {
                     EstadoId = 1,
@@ -80,6 +88,28 @@ namespace Backend.Database
                     EstadoId = 4,
                     Nombre = "RECHAZADA"
                 });
+            #endregion 
+
+
+            #region ROLES
+            modelBuilder.Entity<Rol>().HasData(
+               new Rol
+               {
+                   Id = Guid.NewGuid(),
+                   Name = "ADMIN"
+               },
+               new Rol
+               {
+                   Id = Guid.NewGuid(),
+                   Name = "CLIENTE"
+               },
+               new Rol
+               {
+                   Id = Guid.NewGuid(),
+                   Name = "VENDEDOR"
+               });
+            #endregion
+
             //modelBuilder.Entity<Usuario>().HasData(
             //    new Usuario
             //    {

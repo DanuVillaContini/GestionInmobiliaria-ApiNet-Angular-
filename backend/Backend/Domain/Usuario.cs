@@ -7,13 +7,16 @@ namespace Backend.Domain
     public class Usuario
     {
         [Key]
-        public int UsuarioId { get; set; }
-        [StringLength(30)]
-        public string NameUser { get; set; }
-        [StringLength(100)]
-        public string Correo { get; set; }
-        [StringLength(15)]
-        public string Contraseña { get; set; }
-        public bool EsVendedor { get; set; }
+        public Guid Id { get; set; }
+
+        public string Name { get; set; } = null!;
+
+        public string Username { get; set; } = null!;
+
+        public byte[] PasswordHash { get; set; } = null!;
+
+        public byte[] PasswordSalt { get; set; } = null!;
+
+        public List<Rol> Roles { get; } = [];
     }
 }
