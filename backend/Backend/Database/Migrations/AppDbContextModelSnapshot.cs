@@ -189,17 +189,17 @@ namespace Backend.Database.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("2f67a7f9-cf8a-4da3-917c-9171eb9625b6"),
+                            Id = new Guid("9ae8426a-7c40-44d1-aea1-ed6dd0537f2a"),
                             Name = "ADMIN"
                         },
                         new
                         {
-                            Id = new Guid("695a5393-44d6-4b15-bb08-e423bd5a9834"),
-                            Name = "CLIENTE"
+                            Id = new Guid("42d49566-7183-4848-beaf-c4b483eb27fd"),
+                            Name = "COMERCIAL"
                         },
                         new
                         {
-                            Id = new Guid("771470ff-86bd-4fbb-9481-8f9ab1e6dfda"),
+                            Id = new Guid("fa99ddf7-3ba4-494a-bc62-051fc9d0826d"),
                             Name = "VENDEDOR"
                         });
                 });

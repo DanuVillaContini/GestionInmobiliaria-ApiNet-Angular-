@@ -6,7 +6,7 @@ using Mapster;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-//using Swashbuckle.AspNetCore.Filters;
+using Swashbuckle.AspNetCore.Filters;
 using Microsoft.OpenApi.Models;
 using System.Text;
 
@@ -16,8 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 TypeAdapterConfig.GlobalSettings.Scan(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(
-   /* options =>
+builder.Services.AddSwaggerGen(options =>
 {
     options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
     {
@@ -28,8 +27,7 @@ builder.Services.AddSwaggerGen(
     });
 
     options.OperationFilter<SecurityRequirementsOperationFilter>();
-}*/
-);
+});
 
 var config = builder.Configuration;
 

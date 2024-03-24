@@ -98,10 +98,10 @@ namespace Backend.Database
                    Id = Guid.NewGuid(),
                    Name = "ADMIN"
                },
-               new Rol
+               new Rol //COMERCIAL
                {
                    Id = Guid.NewGuid(),
-                   Name = "CLIENTE"
+                   Name = "COMERCIAL"
                },
                new Rol
                {
