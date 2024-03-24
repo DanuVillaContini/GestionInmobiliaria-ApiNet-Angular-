@@ -18,7 +18,7 @@ public class ReservaService(IReservaRepository reservaRepository) : IReservaServ
 {
     public void AddNewReserva(ReservaRequestDto reservaDto)
     {
-        if (reservaDto != null && !string.IsNullOrEmpty(reservaDto.Usuario))
+        if (reservaDto != null)
         {
             var nuevaReserva = reservaDto.Adapt<ReservaDto>();
             reservaRepository.AddNewReserva(nuevaReserva);

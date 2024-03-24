@@ -16,9 +16,11 @@ namespace Backend.Endpoints.DTO
     {
         public required int ReservaId { get; set; }
         public int ProductoId { get; set; }
+        public Producto Producto { get; set; }
         public string? Usuario { get; set; }
         public string? ClienteNombre { get; set; }
         public int EstadoId { get; set; }
+        public EstadoReserva EstadoReserva { get; set; }
     }
 
     public class ReservaRequestDto

@@ -18,19 +18,28 @@ public class ReservaRespository(AppDbContext context) : IReservaRepository
 {
     public void AddNewReserva(ReservaDto reservaDto)
     {
-        if (reservaDto != null)
+        var producto = context.Productos.FirstOrDefault(p => p.ProductoId == reservaDto.ProductoId);
+        if (producto == null)
         {
-            Reserva reserva = new Reserva
-            {
-                ProductoId = reservaDto.Producto.ProductoId,
-                Usuario = reservaDto.Usuario,
-                ClienteNombre = reservaDto.ClienteNombre,
-                EstadoId = reservaDto.EstadoReserva.EstadoId
-            };
-
-            context.Reservas.Add(reserva);
-            context.SaveChanges();
+            throw new Exception("No se encontró el producto con el ID proporcionado.");
         }
+        var estadoReserva = context.EstadoReservas.FirstOrDefault(e => e.EstadoId == reservaDto.EstadoId);
+        if (estadoReserva == null)
+        {
+            throw new Exception("No se encontró el estado de reserva con el ID proporcionado.");
+        }
+        var reserva = new Reserva
+        {
+            ProductoId = reservaDto.ProductoId,
+            Producto = producto,
+            Usuario = reservaDto.Usuario,
+            ClienteNombre = reservaDto.ClienteNombre,
+            EstadoId = reservaDto.EstadoId,
+            EstadoReserva = estadoReserva
+        };
+
+        context.Reservas.Add(reserva);
+        context.SaveChanges();
     }
 
 
@@ -55,6 +64,8 @@ public class ReservaRespository(AppDbContext context) : IReservaRepository
 
         return reservas.Adapt<List<ReservaDto>>();
     }
+
+    //NO FUNCA-SOLUCIONAR
     public int UpdateEstadoReserva(int reservaId, ReservaDto reservaDto)
     {
         var reserva = context.Reservas.FirstOrDefault(r => r.ReservaId == reservaId);
@@ -63,11 +74,11 @@ public class ReservaRespository(AppDbContext context) : IReservaRepository
 
         reserva.Usuario = reservaDto.Usuario;
         reserva.ClienteNombre = reservaDto.ClienteNombre;
-        reserva.EstadoId = reservaDto.EstadoReserva.EstadoId; // Aquí actualiza directamente el EstadoId
+        reserva.EstadoId = reservaDto.EstadoReserva.EstadoId; 
 
         context.SaveChanges();
 
-        return reserva.ReservaId; // Retorna el ID de la reserva actualizada
+        return reserva.ReservaId; 
     }
 
 
