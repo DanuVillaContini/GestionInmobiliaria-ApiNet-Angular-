@@ -171,9 +171,9 @@ namespace Backend.Database.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("2f67a7f9-cf8a-4da3-917c-9171eb9625b6"), "ADMIN" },
-                    { new Guid("695a5393-44d6-4b15-bb08-e423bd5a9834"), "CLIENTE" },
-                    { new Guid("771470ff-86bd-4fbb-9481-8f9ab1e6dfda"), "VENDEDOR" }
+                    { new Guid("27167471-a64f-46c3-980a-85db7241e525"), "VENDEDOR" },
+                    { new Guid("2d8e88f1-03e3-4944-af6b-df7e70c81dd2"), "ADMIN" },
+                    { new Guid("62b19ff8-2cc5-417c-903e-1fe614d6a85d"), "COMERCIAL" }
                 });
 
             migrationBuilder.CreateIndex(

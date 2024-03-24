@@ -101,7 +101,7 @@ namespace Backend.Database
                new Rol
                {
                    Id = Guid.NewGuid(),
-                   Name = "CLIENTE"
+                   Name = "COMERCIAL"
                },
                new Rol
                {
