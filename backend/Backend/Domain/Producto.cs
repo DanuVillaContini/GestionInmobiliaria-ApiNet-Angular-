@@ -15,6 +15,7 @@ namespace Backend.Domain
         public decimal Precio { get; set; }
         [StringLength(200)]
         public string? UrlImagen { get; set; }
+        public string Estado { get; set;}
 
     }
 }

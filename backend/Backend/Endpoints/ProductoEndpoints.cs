@@ -21,7 +21,6 @@ namespace Backend.Endpoints
 
             }).WithTags("Producto");
 
-
             //---GET-ID---
             app.MapGet("/{productoId:int}", (IProductoService productoService, int productoId) =>
             {
@@ -29,7 +28,6 @@ namespace Backend.Endpoints
 
                 return Results.Ok(producto);
             }).WithTags("Producto");
-
 
             //---POST---
             app.MapPost("/", ([FromServices] IProductoService productoService, [FromBody] ProductoRequestDto productoDto) =>
@@ -39,7 +37,6 @@ namespace Backend.Endpoints
                 return Results.Created();
             }).WithTags("Producto");
 
-
             //---PUT---
             app.MapPut("/{productoId}", ([FromServices] IProductoService productoService, int productoId, [FromBody] ProductoRequestDto productoDto) =>
             {
@@ -47,7 +44,6 @@ namespace Backend.Endpoints
 
                 return Results.Ok();
             }).WithTags("Producto");
-
 
             //---DELETE---
             app.MapDelete("/{productoId}", (IProductoService productoService, int productoId) =>

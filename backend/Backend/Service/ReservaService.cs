@@ -7,11 +7,10 @@ namespace Backend.Service;
 public interface IReservaService
 {
     List<ReservaResponseDto> GetReservas();
-
     ReservaResponseDto GetReservaId(int reservaId);
-
     void AddNewReserva(ReservaRequestDto reservaDto);
-    int UpdateEstadoReserva(int reservaId, ReservaRequestDto reservaDto); 
+    int UpdateEstadoReserva(int reservaId, EstadosReservaRequestDto reservaDto);
+    List<ReservaResponseDto> GetReservasPorEstado(int estadoReservaId);
 }
 
 public class ReservaService(IReservaRepository reservaRepository) : IReservaService
@@ -25,7 +24,6 @@ public class ReservaService(IReservaRepository reservaRepository) : IReservaServ
         }
     }
 
-
     public ReservaResponseDto GetReservaId(int reservaId)
     {
         return reservaRepository.GetReservaId(reservaId).Adapt<ReservaResponseDto>();
@@ -38,7 +36,13 @@ public class ReservaService(IReservaRepository reservaRepository) : IReservaServ
         return reservas;
     }
 
-    public int UpdateEstadoReserva(int reservaId, ReservaRequestDto reservaDto)
+    public List<ReservaResponseDto> GetReservasPorEstado(int estadoReservaId)
+    {
+        var reservas = reservaRepository.GetReservasPorEstado(estadoReservaId).Adapt<List<ReservaResponseDto>>();
+        return reservas;
+    }
+
+    public int UpdateEstadoReserva(int reservaId, EstadosReservaRequestDto reservaDto)
     {
         var reservaDtoConverted = reservaDto.Adapt<ReservaDto>();
         return reservaRepository.UpdateEstadoReserva(reservaId, reservaDtoConverted);

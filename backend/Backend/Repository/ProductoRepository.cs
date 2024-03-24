@@ -24,7 +24,8 @@ namespace Backend.Repository
                 Codigo = productoDto.Codigo,
                 Precio = productoDto.Precio,
                 Barrio = productoDto.Barrio,
-                UrlImagen = productoDto.UrlImagen
+                UrlImagen = productoDto.UrlImagen,
+                Estado = "DISPONIBLE"
             };
 
             context.Productos.Add(producto);

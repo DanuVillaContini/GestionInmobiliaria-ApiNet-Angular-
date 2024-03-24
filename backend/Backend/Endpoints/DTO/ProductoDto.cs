@@ -7,6 +7,7 @@
         public required string Barrio { get; set; }
         public required decimal Precio { get; set; }
         public string? UrlImagen { get; set; }
+        public string? Estado { get; set; }
     }
 
     public class ProductoRequestDto
@@ -24,5 +25,7 @@
         public required string Barrio { get; set; }
         public required decimal Precio { get; set; }
         public string? UrlImagen { get; set; }
+        public string? Estado { get; set; }
+
     }
 }

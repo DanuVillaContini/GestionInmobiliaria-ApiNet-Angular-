@@ -47,7 +47,8 @@ namespace Backend.Database.Migrations
                     Codigo = table.Column<string>(type: "TEXT", maxLength: 10, nullable: false),
                     Barrio = table.Column<string>(type: "TEXT", maxLength: 30, nullable: false),
                     Precio = table.Column<decimal>(type: "TEXT", nullable: false),
-                    UrlImagen = table.Column<string>(type: "TEXT", maxLength: 200, nullable: true)
+                    UrlImagen = table.Column<string>(type: "TEXT", maxLength: 200, nullable: true),
+                    Estado = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -121,12 +122,12 @@ namespace Backend.Database.Migrations
 
             migrationBuilder.InsertData(
                 table: "Producto",
-                columns: new[] { "ProductoId", "Barrio", "Codigo", "Precio", "UrlImagen" },
+                columns: new[] { "ProductoId", "Barrio", "Codigo", "Estado", "Precio", "UrlImagen" },
                 values: new object[,]
                 {
-                    { 1, "Prospero Mena", "PDVzL-0001", 1000000m, null },
-                    { 2, "Modelo", "PDVhL-0002", 2500000m, null },
-                    { 3, "Oeste II", "PDVkL-0003", 35000000m, null }
+                    { 1, "Prospero Mena", "PDVzL-0001", "DISPONIBLE", 1000000m, null },
+                    { 2, "Modelo", "PDVhL-0002", "DISPONIBLE", 2500000m, null },
+                    { 3, "Oeste II", "PDVkL-0003", "DISPONIBLE", 35000000m, null }
                 });
 
             migrationBuilder.CreateIndex(

@@ -100,6 +100,10 @@ namespace Backend.Database.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Estado")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<decimal>("Precio")
                         .HasColumnType("TEXT");
 
@@ -117,6 +121,7 @@ namespace Backend.Database.Migrations
                             ProductoId = 1,
                             Barrio = "Prospero Mena",
                             Codigo = "PDVzL-0001",
+                            Estado = "DISPONIBLE",
                             Precio = 1000000m
                         },
                         new
@@ -124,6 +129,7 @@ namespace Backend.Database.Migrations
                             ProductoId = 2,
                             Barrio = "Modelo",
                             Codigo = "PDVhL-0002",
+                            Estado = "DISPONIBLE",
                             Precio = 2500000m
                         },
                         new
@@ -131,6 +137,7 @@ namespace Backend.Database.Migrations
                             ProductoId = 3,
                             Barrio = "Oeste II",
                             Codigo = "PDVkL-0003",
+                            Estado = "DISPONIBLE",
                             Precio = 35000000m
                         });
                 });

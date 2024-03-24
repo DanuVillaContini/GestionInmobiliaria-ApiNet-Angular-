@@ -6,7 +6,6 @@ namespace Backend.Database
     public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
     {
 
-        //Aqui se va a definir las entidades de mi db,osea mis clases dominio:
         public DbSet<Producto> Productos { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Reserva> Reservas { get; set; }
@@ -23,6 +22,7 @@ namespace Backend.Database
                     Codigo = "PDVzL-0001",
                     Barrio = "Prospero Mena",
                     Precio = 1000000,
+                    Estado = "DISPONIBLE"
                 },
                 new Producto
                 {
@@ -30,6 +30,8 @@ namespace Backend.Database
                     Codigo = "PDVhL-0002",
                     Barrio = "Modelo",
                     Precio = 2500000,
+                    Estado = "DISPONIBLE"
+
                 },
                 new Producto
                 {
@@ -37,6 +39,8 @@ namespace Backend.Database
                     Codigo = "PDVkL-0003",
                     Barrio = "Oeste II",
                     Precio = 35000000,
+                    Estado = "DISPONIBLE"
+
                 }
                 );
                 modelBuilder.Entity<EstadoProducto>().HasData(
