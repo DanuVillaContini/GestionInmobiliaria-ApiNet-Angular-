@@ -13,11 +13,16 @@ public interface IReservaRepository
     void AddNewReserva(ReservaDto reservaDto);
     int UpdateEstadoReserva(int reservaId, ReservaDto reservaDto);
     List<ReservaDto> GetReservasPorEstado(int estadoReservaId);
+    void ProcesarSolicitudAprobacion(int reservaId);
 
 
 }
 public class ReservaRespository(AppDbContext context) : IReservaRepository
 {
+    //En los siguientes casos las reservas no requieren aprobación alguna (se auto aprueban)
+    //Pertenece al Barrio X y su precio es menor a 100.000
+    //Es el último producto disponible del Barrio X
+
     public void AddNewReserva(ReservaDto reservaDto)
     {
         var producto = context.Productos.FirstOrDefault(p => p.ProductoId == reservaDto.ProductoId);
@@ -76,6 +81,30 @@ public class ReservaRespository(AppDbContext context) : IReservaRepository
             .ToList();
 
         return reservas.Adapt<List<ReservaDto>>();
+    }
+
+    public void ProcesarSolicitudAprobacion(int reservaId)
+    {
+        var reserva = context.Reservas
+        .Include(r => r.Producto)
+        .Include(r => r.EstadoReserva)
+        .FirstOrDefault(r => r.ReservaId == reservaId);
+
+        if (reserva == null)
+            throw new Exception($"La reserva con el ID {reservaId} no existe.");
+
+        var producto = reserva.Producto;
+
+        if (producto.Barrio == "X" && producto.Precio <= 100000)
+        {
+            reserva.EstadoId = 2;
+            producto.Estado = "VENDIDO";
+        }
+        else
+            throw new Exception($"ReservaId {producto.ProductoId} no obtuvo aprobacion directa, requiere examinacion detenida");
+
+
+        context.SaveChanges();
     }
 
     public int UpdateEstadoReserva(int reservaId, ReservaDto reservaDto)

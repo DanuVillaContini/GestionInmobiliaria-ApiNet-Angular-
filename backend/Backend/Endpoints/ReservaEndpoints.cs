@@ -52,6 +52,14 @@ namespace Backend.Endpoints
                 else
                     return Results.NotFound();
             }).WithTags("Reservas");
+
+            //Peticion-aprobacion-checkout
+            app.MapPost("/{reservaId:int}/Checkout", (IReservaService reservaService, int reservaId) =>
+            {
+                reservaService.ProcesarSolicitudAprobacion(reservaId);
+
+                return Results.Ok();
+            }).WithTags("Reservas");
         }
     }
 }
