@@ -13,12 +13,17 @@ export class LoginComponent implements OnInit {
   private fb = inject(FormBuilder)
   private router = inject(Router);
   myFormLogin!: FormGroup
+  hide: boolean = true;
 
   ngOnInit(): void {
     this.myFormLogin = this.fb.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     })
+  }
+
+  togglePasswordVisibility(): void {
+    this.hide = !this.hide;
   }
 
 
@@ -30,7 +35,6 @@ export class LoginComponent implements OnInit {
     // result ok:
     this.router.navigateByUrl('home')
     // this.router.navigate(['detalle', 1])
-
   }
 
 }

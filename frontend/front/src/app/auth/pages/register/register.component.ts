@@ -13,6 +13,7 @@ export class RegisterComponent {
   private fb = inject(FormBuilder)
   private router = inject(Router);
   myFormRegister!: FormGroup
+  hide: boolean = true;
 
   ngOnInit(): void {
     this.myFormRegister = this.fb.group({
@@ -21,6 +22,10 @@ export class RegisterComponent {
       password: ['', [Validators.required, Validators.minLength(6)]],
       esVendedor: ['1', [Validators.required]]
     })
+  }
+
+  togglePasswordVisibility(): void {
+    this.hide = !this.hide;
   }
 
   emailValidator(control: AbstractControl): { [key: string]: any } | null {

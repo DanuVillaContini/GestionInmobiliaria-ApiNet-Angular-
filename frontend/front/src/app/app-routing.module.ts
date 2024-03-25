@@ -15,6 +15,11 @@ const routes: Routes = [
     .then(m => m.AuthModule)
   },
   {
+    path: 'productos',
+    loadChildren: () => import('./productos/productos.module')
+    .then(m => m.ProductosModule)
+  },
+  {
     path: '',
     component: HomeComponent,
   },

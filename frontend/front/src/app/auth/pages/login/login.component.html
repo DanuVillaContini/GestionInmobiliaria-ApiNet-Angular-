@@ -1,20 +1,38 @@
 <h2>LOGIN</h2><hr>
 <form [formGroup]="myFormLogin" (ngSubmit)="login()">
 
-  <div>
-
-    <label for="username">Usuario</label>
-    <input type="text" id="username" name="username" formControlName="username">
-
+  <div class="example-container">
+    <mat-form-field>
+      <mat-label>Enter your username</mat-label>
+      <input matInput
+            placeholder="username"
+            formControlName="username"
+            required>
+      <mat-error *ngIf="myFormLogin.get('username')?.invalid && myFormLogin.get('username')?.touched">
+        Please enter a valid username
+      </mat-error>
+    </mat-form-field>
   </div>
-  <div>
 
-    <label for="username">Password</label>
-
-    <input type="password" name="password" formControlName="password">
+  <div class="example-container">
+    <mat-form-field>
+      <mat-label>Enter your password</mat-label>
+      <input matInput
+            type="password"
+            placeholder="Password"
+            formControlName="password"
+            required>
+      <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" [attr.aria-label]="hide ? 'Hide password' : 'Show password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
   </div>
 
-  <hr>
-  <button type="submit" class="button-submit">Login</button>
-  <button type="button" routerLink="/auth/register" class="button-submit">Registrarse</button>
+  <section>
+    <div class="example-button-row">
+      <button mat-raised-button type="submit" >Login</button>
+      <button mat-raised-button color="accent" type="button" routerLink="/auth/register">Registrarse</button>
+    </div>
+  </section>
+
 </form>
