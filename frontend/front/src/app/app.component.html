@@ -1,12 +1,2 @@
-<style>
-  main {
-    width:auto;
-    min-height: auto;
-  }
-</style>
-
-<main class="main"></main>
-
-
-
-<router-outlet />
+<button *ngIf="isAuthenticated" (click)="logout()">DESLOGUEAR</button>
+<router-outlet></router-outlet>

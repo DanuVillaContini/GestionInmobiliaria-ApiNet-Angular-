@@ -14,7 +14,7 @@ export class ProductosService {
   constructor() { }
 
   getProducts():Observable<any> {
-    return this.http.get<any>(`${this.url}/api/Producto`);
+    return this.http.get<any>(`${this.url}/Producto`);
     //agregar token cuando agregue lo de auth del back 52:00
   }
 }
