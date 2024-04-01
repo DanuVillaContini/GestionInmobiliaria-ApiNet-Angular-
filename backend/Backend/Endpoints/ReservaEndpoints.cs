@@ -1,6 +1,7 @@
 ﻿using Backend.Endpoints.DTO;
 using Backend.Service;
 using Carter;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +20,7 @@ namespace Backend.Endpoints
 
                 return Results.Ok(r);
 
-            }).WithTags("Reservas");
+            }).WithTags("Reservas").RequireAuthorization(new AuthorizeAttribute { Roles = "COMERCIAL, ADMIN" });
 
             //---GET-ID---
             app.MapGet("/{reservaId:int}", (IReservaService reservaService, int reservaId) =>
@@ -27,21 +28,21 @@ namespace Backend.Endpoints
                 var rID = reservaService.GetReservaId(reservaId);
 
                 return Results.Ok(rID);
-            }).WithTags("Reservas");
+            }).WithTags("Reservas").RequireAuthorization(new AuthorizeAttribute { Roles = "COMERCIAL, ADMIN" });
 
             //---GET-Filtradas-por-estado-de-reservas---
             app.MapGet("/filtroestado/{estadoReservaId:int}", (IReservaService reservaService, int estadoReservaId) =>
             {
                 var reservasFiltro = reservaService.GetReservasPorEstado(estadoReservaId);
                 return Results.Ok(reservasFiltro);
-            }).WithTags("Reservas");
+            }).WithTags("Reservas").RequireAuthorization(new AuthorizeAttribute { Roles = "COMERCIAL, ADMIN" });
 
             //---POST---
             app.MapPost("/", ([FromServices] IReservaService reservaService, [FromBody] ReservaRequestDto reservaDto) =>
             {
                 reservaService.AddNewReserva(reservaDto);
                 return Results.NoContent();
-            }).WithTags("Reservas");
+            }).WithTags("Reservas").RequireAuthorization(new AuthorizeAttribute { Roles = "VENDEDOR, ADMIN" });
 
             //---PUT-update-estado-reserva---
             app.MapPut("/updateestado/{reservaId:int}", ([FromServices] IReservaService reservaService, int reservaId, [FromBody] EstadosReservaRequestDto reservaDto) =>
@@ -51,7 +52,7 @@ namespace Backend.Endpoints
                     return Results.NoContent();
                 else
                     return Results.NotFound();
-            }).WithTags("Reservas");
+            }).WithTags("Reservas").RequireAuthorization(new AuthorizeAttribute { Roles = "VENDEDOR, COMERCIAL, ADMIN" });
 
             //Peticion-aprobacion-checkout
             app.MapPost("/{reservaId:int}/Checkout", (IReservaService reservaService, int reservaId) =>
@@ -59,7 +60,7 @@ namespace Backend.Endpoints
                 reservaService.ProcesarSolicitudAprobacion(reservaId);
 
                 return Results.Ok();
-            }).WithTags("Reservas");
+            }).WithTags("Reservas").RequireAuthorization(new AuthorizeAttribute { Roles = "VENDEDOR, COMERCIAL, ADMIN" });
         }
     }
 }

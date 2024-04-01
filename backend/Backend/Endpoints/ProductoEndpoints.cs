@@ -4,6 +4,7 @@ using Backend.Endpoints.DTO;
 using Backend.Service;
 using Carter;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Backend.Endpoints
 {
@@ -19,7 +20,7 @@ namespace Backend.Endpoints
 
                 return Results.Ok(productos);
 
-            }).WithTags("Producto");
+            }).WithTags("Producto").RequireAuthorization(new AuthorizeAttribute { Roles = "VENDEDOR, ADMIN" });
 
             //---GET-ID---
             app.MapGet("/{productoId:int}", (IProductoService productoService, int productoId) =>
@@ -27,7 +28,7 @@ namespace Backend.Endpoints
                 var producto = productoService.GetProducto(productoId);
 
                 return Results.Ok(producto);
-            }).WithTags("Producto");
+            }).WithTags("Producto").RequireAuthorization(new AuthorizeAttribute { Roles = "VENDEDOR, ADMIN" });
 
             //---POST---
             app.MapPost("/", ([FromServices] IProductoService productoService, [FromBody] ProductoRequestDto productoDto) =>
@@ -35,7 +36,7 @@ namespace Backend.Endpoints
                 productoService.CreateProducto(productoDto);
 
                 return Results.Created();
-            }).WithTags("Producto");
+            }).WithTags("Producto").RequireAuthorization(new AuthorizeAttribute { Roles = "VENDEDOR, ADMIN" });
 
             //---PUT---
             app.MapPut("/{productoId}", ([FromServices] IProductoService productoService, int productoId, [FromBody] ProductoRequestDto productoDto) =>
@@ -43,7 +44,7 @@ namespace Backend.Endpoints
                 productoService.UpdateProducto(productoId, productoDto);
 
                 return Results.Ok();
-            }).WithTags("Producto");
+            }).WithTags("Producto").RequireAuthorization(new AuthorizeAttribute { Roles = "VENDEDOR, ADMIN" });
 
             //---DELETE---
             app.MapDelete("/{productoId}", (IProductoService productoService, int productoId) =>
@@ -51,7 +52,7 @@ namespace Backend.Endpoints
                 productoService.DeleteProducto(productoId);
 
                 return Results.NoContent();
-            }).WithTags("Producto");
+            }).WithTags("Producto").RequireAuthorization(new AuthorizeAttribute { Roles = "VENDEDOR, ADMIN" });
         }
     }
 }
