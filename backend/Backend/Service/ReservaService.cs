@@ -12,6 +12,7 @@ public interface IReservaService
     int UpdateEstadoReserva(int reservaId, EstadosReservaRequestDto reservaDto);
     List<ReservaResponseDto> GetReservasPorEstado(int estadoReservaId);
     void ProcesarSolicitudAprobacion(int reservaId);
+    List<ReservaResponseDto> GetReservasPorUsuario(string username);
 }
 
 public class ReservaService(IReservaRepository reservaRepository) : IReservaService
@@ -40,6 +41,12 @@ public class ReservaService(IReservaRepository reservaRepository) : IReservaServ
     public List<ReservaResponseDto> GetReservasPorEstado(int estadoReservaId)
     {
         var reservas = reservaRepository.GetReservasPorEstado(estadoReservaId).Adapt<List<ReservaResponseDto>>();
+        return reservas;
+    }
+
+    public List<ReservaResponseDto> GetReservasPorUsuario(string username)
+    {
+        var reservas = reservaRepository.GetReservasPorUsuario(username).Adapt<List<ReservaResponseDto>>();
         return reservas;
     }
 

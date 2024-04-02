@@ -21,9 +21,9 @@ namespace Backend.Repository
         {
             Producto producto = new Producto
             {
-                Codigo = productoDto.Codigo,
+                Codigo = productoDto.Codigo.ToUpper(),
                 Precio = productoDto.Precio,
-                Barrio = productoDto.Barrio,
+                Barrio = productoDto.Barrio.ToUpper(),
                 UrlImagen = productoDto.UrlImagen,
                 Estado = "DISPONIBLE"
             };
@@ -58,14 +58,16 @@ namespace Backend.Repository
 
         public int UpdateProducto(int productoId, ProductoDto productoDto)
         {
-            var rowsAffected = context.Productos.Where(x => x.ProductoId == productoId)
-             .ExecuteUpdate(update =>
-                update.SetProperty(entity => entity.Codigo, productoDto.Codigo)
-                    .SetProperty(entity => entity.Barrio, productoDto.Barrio)
-                    .SetProperty(entity => entity.Precio, productoDto.Precio)
-                    .SetProperty(entity => entity.UrlImagen, productoDto.UrlImagen));
+            var rowsAffected = context.Productos
+                .Where(x => x.ProductoId == productoId)
+                .ExecuteUpdate(update =>
+                    update.SetProperty(entity => entity.Codigo, productoDto.Codigo.ToUpper()) // Convertir a mayúsculas
+                          .SetProperty(entity => entity.Barrio, productoDto.Barrio.ToUpper()) // Convertir a mayúsculas
+                          .SetProperty(entity => entity.Precio, productoDto.Precio)
+                          .SetProperty(entity => entity.UrlImagen, productoDto.UrlImagen.ToUpper())); // Convertir a mayúsculas
 
             return rowsAffected;
         }
+
     }
 }

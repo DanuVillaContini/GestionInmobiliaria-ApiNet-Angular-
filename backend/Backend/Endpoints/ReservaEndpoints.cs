@@ -31,9 +31,16 @@ namespace Backend.Endpoints
             }).WithTags("Reservas").RequireAuthorization(new AuthorizeAttribute { Roles = "COMERCIAL, ADMIN" });
 
             //---GET-Filtradas-por-estado-de-reservas---
-            app.MapGet("/filtroestado/{estadoReservaId:int}", (IReservaService reservaService, int estadoReservaId) =>
+            app.MapGet("/filtroxestado/{estadoReservaId:int}", (IReservaService reservaService, int estadoReservaId) =>
             {
                 var reservasFiltro = reservaService.GetReservasPorEstado(estadoReservaId);
+                return Results.Ok(reservasFiltro);
+            }).WithTags("Reservas").RequireAuthorization(new AuthorizeAttribute { Roles = "COMERCIAL, ADMIN" });
+
+            //---GET-Filtradas-por-UserName---
+            app.MapGet("/filtroxusername/{username}", (IReservaService reservaService, string username) =>
+            {
+                var reservasFiltro = reservaService.GetReservasPorUsuario(username);
                 return Results.Ok(reservasFiltro);
             }).WithTags("Reservas").RequireAuthorization(new AuthorizeAttribute { Roles = "COMERCIAL, ADMIN" });
 
@@ -55,7 +62,7 @@ namespace Backend.Endpoints
             }).WithTags("Reservas").RequireAuthorization(new AuthorizeAttribute { Roles = "VENDEDOR, COMERCIAL, ADMIN" });
 
             //Peticion-aprobacion-checkout
-            app.MapPost("/{reservaId:int}/Checkout", (IReservaService reservaService, int reservaId) =>
+            app.MapPost("/Aprobar/{reservaId:int}", (IReservaService reservaService, int reservaId) =>
             {
                 reservaService.ProcesarSolicitudAprobacion(reservaId);
 

@@ -14,15 +14,11 @@ public interface IReservaRepository
     int UpdateEstadoReserva(int reservaId, ReservaDto reservaDto);
     List<ReservaDto> GetReservasPorEstado(int estadoReservaId);
     void ProcesarSolicitudAprobacion(int reservaId);
-
+    List<ReservaDto> GetReservasPorUsuario(string username);
 
 }
 public class ReservaRespository(AppDbContext context) : IReservaRepository
 {
-    //En los siguientes casos las reservas no requieren aprobación alguna (se auto aprueban)
-    //Pertenece al Barrio X y su precio es menor a 100.000
-    //Es el último producto disponible del Barrio X
-
     public void AddNewReserva(ReservaDto reservaDto)
     {
         var producto = context.Productos.FirstOrDefault(p => p.ProductoId == reservaDto.ProductoId);
@@ -41,8 +37,8 @@ public class ReservaRespository(AppDbContext context) : IReservaRepository
         {
             ProductoId = reservaDto.ProductoId,
             Producto = producto,
-            Usuario = reservaDto.Usuario,
-            ClienteNombre = reservaDto.ClienteNombre,
+            Usuario = reservaDto.Usuario.ToUpper(),
+            ClienteNombre = reservaDto.ClienteNombre.ToUpper(),
             EstadoId = reservaDto.EstadoId,
             EstadoReserva = estadoReserva
         };
@@ -76,6 +72,17 @@ public class ReservaRespository(AppDbContext context) : IReservaRepository
     {
         var reservas = context.Reservas
             .Where(e => e.EstadoReserva.EstadoId == estadoReservaId)
+            .Include(r => r.Producto)
+            .Include(r => r.EstadoReserva)
+            .ToList();
+
+        return reservas.Adapt<List<ReservaDto>>();
+    }
+
+    public List<ReservaDto> GetReservasPorUsuario(string username)
+    {
+        var reservas = context.Reservas
+            .Where(r => r.Usuario.ToUpper() == username.ToUpper()) // Comparar en mayúsculas
             .Include(r => r.Producto)
             .Include(r => r.EstadoReserva)
             .ToList();
