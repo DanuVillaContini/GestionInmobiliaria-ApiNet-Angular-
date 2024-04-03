@@ -7,7 +7,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatSelectModule} from '@angular/material/select';
+import {MatMenuModule} from '@angular/material/menu';
 import {MatDialog,MatDialogRef, MatDialogActions, MatDialogClose,MatDialogTitle,MatDialogContent} from '@angular/material/dialog';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import {MatDialog,MatDialogRef, MatDialogActions, MatDialogClose,MatDialogTitle,
     MatTableModule, MatButtonModule, MatIconModule,
     MatInputModule, MatFormFieldModule, MatDividerModule,MatSelectModule,
     MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent,
+    MatMenuModule,
+    MatListModule
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,63 @@
+<div class="container ">
+  <div class="row">
+    <div class="example-button-row">
+      <button class="custom-btt-volver" mat-raised-button [routerLink]="['/productos/detalles']">Volver</button>
+    </div>
+  </div>
+
+  <div class="row d-flex justify-content-center align-items-center text-center">
+    <h1><strong>NUEVA RESERVA</strong></h1><br>
+    <hr>
+    <div class="col-6">
+      <h4><strong>Productos Disponibles</strong></h4>
+      <span>Seleccione uno:</span>
+      <mat-selection-list #r [multiple]="false">
+        <mat-list-option class="m-3" [ngStyle]="{'margin-bottom': '10px', 'height': 'auto', 'wight': 'auto', 'border-bottom': '1px solid black'}"
+        *ngFor="let producto of productos" [value]="producto"
+        (click)="seleccionarProducto(producto)">
+          {{producto.codigo}}
+          Barrio {{producto.barrio}}<br>
+          $ {{producto.precio}}<br>
+          {{producto.estado}}<br>
+        </mat-list-option>
+      </mat-selection-list>
+      <p>
+        Producto seleccionado: {{r.selectedOptions.hasValue() ? r.selectedOptions.selected[0].value.codigo : 'Ninguno'}}
+      </p>
+      <hr>
+    </div>
+
+
+    <div class="col-6">
+      <form [formGroup]="reservaForm" (ngSubmit)="Create()">
+        <div class="example-container">
+          <mat-form-field>
+            <mat-label>Producto Id</mat-label>
+            <input matInput type="text" placeholder="Id del Producto" formControlName="productoId" required>
+          </mat-form-field>
+        </div>
+
+        <div class="example-container">
+          <mat-form-field>
+            <mat-label>Usuario</mat-label>
+            <input matInput type="text" placeholder="Usuario Vendedor" formControlName="usuario" required>
+          </mat-form-field>
+        </div>
+
+        <div class="example-container">
+          <mat-form-field>
+            <mat-label>Cliente</mat-label>
+            <input matInput type="text" placeholder="Cliente" formControlName="clienteNombre" required>
+          </mat-form-field>
+        </div>
+        <hr>
+        <div class="example-button-row">
+          <button mat-raised-button class="custom-btt-crear" type="submit">Crear</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+
+</div>

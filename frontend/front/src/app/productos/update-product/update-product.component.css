@@ -2,10 +2,10 @@
   background-color: rgb(149, 218, 189) !important;
 }
 .custom-btt-edit{
-  background-color: rgb(149, 154, 218) !important;
+  background-color: rgb(149, 154, 218) !important;  margin: 0;
 }
 .custom-btt-delete{
-  background-color: rgb(211, 131, 131) !important;
+  background-color: rgb(211, 131, 131) !important;  margin: 0;
 }
 .custom-btt-volver{
   background-color: rgb(218, 202, 149) !important;

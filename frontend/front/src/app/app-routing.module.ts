@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/pages/home/home.component';
+import { HomeComponent } from './home/home/home.component';
 import { authGuard } from './auth/guard/auth.guard';
 import { redireccionGuard } from './auth/guard/redireccion.guard';
 import { isNotAuthenticatedGuard } from './auth/guard/is-not-authenticated.guard';
@@ -27,6 +27,13 @@ const routes: Routes = [
     data:{roles: ['ADMIN']},
     loadChildren: () => import('./productos/productos.module')
     .then(m => m.ProductosModule)
+  },
+  {
+    path: 'reservas',
+    canActivate: [authGuard],
+    data:{roles: ['ADMIN']},
+    loadChildren: () => import('./reservas/reservas.module')
+    .then(m => m.ReservasModule)
   },
   {
     path: '',
