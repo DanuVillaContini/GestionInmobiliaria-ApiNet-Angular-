@@ -1,6 +1,7 @@
 button {
-  color:white;
-  background: rgb(217, 32, 32);
+  color:black;
+  background: rgb(218, 202, 149) ;
   padding: 8px;
   cursor: pointer;
+  border-color: rgb(156, 146, 111);
 }

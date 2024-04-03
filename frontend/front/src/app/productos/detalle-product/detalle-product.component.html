@@ -6,17 +6,10 @@
     </div>
 
     <div class="col-6 d-flex justify-content-end">
-      <div class="col-6 col-6 d-flex justify-content-start align-items-center">
-        <div class="example-button-row ">
-          <div class="example-flex-container ">
-            <div class="example-button-container ">
-              <div class="example-button-container d-flex justify-content-start align-items-center">
-                <h3 class="m-1"><strong>NUEVO</strong></h3>
-                <button mat-fab color="" class="custom-btt-crear" [routerLink]="['/reservas/nuevo']">
-                  <mat-icon>plus_one</mat-icon>
-                </button>
-              </div>
-            </div>
+      <div class="container">
+        <div class="row d-flex justify-content-end">
+          <div class="col-6 d-flex justify-content-end">
+                <button class="custom-btt-crear" [ngStyle]="{ 'height': '2.5rem', 'wight': '1rem'}" mat-raised-button [routerLink]="['/productos/nuevo']"><strong>NUEVO</strong><mat-icon>plus_one</mat-icon></button>
           </div>
         </div>
       </div>

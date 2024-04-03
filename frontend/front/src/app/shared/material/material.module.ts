@@ -10,6 +10,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatDialog,MatDialogRef, MatDialogActions, MatDialogClose,MatDialogTitle,MatDialogContent} from '@angular/material/dialog';
 import {MatListModule} from '@angular/material/list';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {MatListModule} from '@angular/material/list';
     MatInputModule, MatFormFieldModule, MatDividerModule,MatSelectModule,
     MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent,
     MatMenuModule,
-    MatListModule
+    MatListModule,
+    FormsModule
   ],
   imports: [
     CommonModule,
