@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <div class="example-button-row">
+      <button class="custom-btt-volver" mat-raised-button [routerLink]="['/productos/detalles']">Volver</button>
+    </div>
+  </div>
+
+  <div class="row d-flex justify-content-center align-items-center text-center">
+    <h1>EDITAR PRODUCTO</h1>
+    <hr>
+    <form class="example-form" [formGroup]="productForm" (ngSubmit)="Update()">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Código" formControlName="codigo">
+      </mat-form-field><br>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Barrio" formControlName="barrio">
+      </mat-form-field><br>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Precio" formControlName="precio">
+      </mat-form-field><br>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="URL de Imagen" formControlName="urlImagen">
+      </mat-form-field><br>
+
+      <button mat-raised-button class="custom-btt-edit" type="submit">Guardar</button>
+    </form>
+  </div>
+
+</div>

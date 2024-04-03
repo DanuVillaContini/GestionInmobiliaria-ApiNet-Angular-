@@ -1,0 +1,47 @@
+<div class="container ">
+  <div class="row">
+    <div class="example-button-row">
+      <button class="custom-btt-volver" mat-raised-button [routerLink]="['/productos/detalles']">Volver</button>
+    </div>
+  </div>
+  <div class="row d-flex justify-content-center align-items-center text-center">
+    <h1>NUEVO PRODUCTO</h1><br>
+    <hr>
+    <form [formGroup]="productForm" (ngSubmit)="create()">
+      <div class="example-container">
+        <mat-form-field>
+          <mat-label>Codigo</mat-label>
+          <input matInput placeholder="PDVZL-(cuatro digitos)" formControlName="codigo" required>
+        </mat-form-field>
+      </div>
+
+      <div class="example-container">
+        <mat-form-field>
+          <mat-label>Barrio</mat-label>
+          <input matInput type="text" placeholder="Barrio" formControlName="barrio" required>
+        </mat-form-field>
+      </div>
+
+      <div class="example-container">
+        <mat-form-field>
+          <mat-label>Precio</mat-label>
+          <input matInput type="text" placeholder="$" formControlName="precio" required>
+        </mat-form-field>
+      </div>
+
+      <div class="example-container">
+        <mat-form-field>
+          <mat-label>Url Imagen</mat-label>
+          <input matInput type="text" placeholder="Url Imagen" formControlName="urlImagen">
+        </mat-form-field>
+      </div>
+      <hr>
+      <div class="example-button-row">
+        <button mat-raised-button class="custom-btt-crear" type="submit">Crear</button>
+      </div>
+    </form>
+
+  </div>
+
+
+</div>
