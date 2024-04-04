@@ -5,13 +5,15 @@ import { CrearComponent } from './crear/crear.component';
 import { MaterialModule } from '../shared/material/material.module';
 import { ReservasRoutingModule } from './reservas-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UpdateEstadoComponent } from './update-estado/update-estado.component';
 
 
 
 @NgModule({
   declarations: [
     DetallesComponent,
-    CrearComponent
+    CrearComponent,
+    UpdateEstadoComponent
   ],
   imports: [
     CommonModule,

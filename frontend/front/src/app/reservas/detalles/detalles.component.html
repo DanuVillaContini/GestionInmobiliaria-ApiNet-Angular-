@@ -63,11 +63,11 @@
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
-                <button mat-menu-item>
+                <button mat-menu-item (click)="checkAprobacionDirecta(element)">
                   <mat-icon>help_center</mat-icon>
                   <span>Check Aprobacion Directa</span>
                 </button>
-                <button mat-menu-item>
+                <button mat-menu-item [routerLink]="['/reservas/updateestado',element]">
                   <mat-icon>settings</mat-icon>
                   <span>Cambiar Estado Reserva</span>
                 </button>
@@ -89,7 +89,7 @@
           <mat-tab label="Estado">
             <div class="col d-flex justify-content-start">
               <mat-form-field>
-                <mat-label>State</mat-label>
+                <mat-label>Seleccione estado</mat-label>
                 <mat-select (selectionChange)="seleccionEstado($event.value)">
                   <mat-option *ngFor="let estado of estadosReserva" [value]="estado.estadoId">
                     {{estado.nombre}}

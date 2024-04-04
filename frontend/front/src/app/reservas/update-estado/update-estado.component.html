@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="row">
+    <div class="example-button-row">
+      <button class="custom-btt-volver" mat-raised-button [routerLink]="['/reservas/detalles']">Volver</button>
+    </div>
+  </div>
+
+  <div class="row d-flex justify-content-center align-items-center text-center">
+    <h1>CAMBIAR ESTADO DE LA RESERVA</h1>
+    <hr>
+    <form class="example-form" [formGroup]="reservaForm" (ngSubmit)="cambiarEstadoReserva()">
+      <div class="row">
+        <div class="col-4" >
+          <mat-form-field class="example-full-width">
+            <input matInput [placeholder]="estadoActual" [readonly]="true" formControlName="estadoId">
+          </mat-form-field><br>
+        </div>
+        <div class="col-4">
+          <mat-icon ><span class="material-symbols-outlined ">
+            360
+            </span></mat-icon>
+        </div>
+        <div class="col-4">
+          <mat-form-field>
+            <mat-label>Seleccione estado</mat-label>
+            <mat-select formControlName="estadoId" (selectionChange)="seleccionEstado($event.value)">
+              <mat-option *ngFor="let estado of estadosReserva" [value]="estado.estadoId">
+                {{estado.nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field><br>
+        </div>
+      </div>
+
+      <button mat-raised-button class="custom-btt-edit" type="submit">Guardar</button>
+    </form>
+  </div>
+
+</div>

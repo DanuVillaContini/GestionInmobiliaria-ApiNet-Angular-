@@ -14,7 +14,7 @@ export class DetallesComponent implements OnInit {
   displayedColumns: string[] = ['codigo', 'barrio', 'precio', 'urlImagen', 'estado', 'usuario', 'cliente', 'estadoReserva', 'acciones'];
   reservas: IReservas[] = [];
   estadosReserva: IEstadosReserva[] = [];
-  estadoSeleccionado: number | null = null; // Variable para almacenar el estado seleccionado
+  estadoSeleccionado: number | null = null;
 
   ngOnInit(): void {
     this.getReservas();
@@ -56,5 +56,27 @@ export class DetallesComponent implements OnInit {
         this.reservas = reservas;
       });
   }
+
+checkAprobacionDirecta(reservas: IReservas): void {
+  console.log('ReservaId:', reservas.reservaId);
+  if (reservas && reservas.reservaId) {
+    if(confirm(`¿Quieres hacer una evaluacion automatica para check si la reserva ${reservas.reservaId} posee aprobacion directa?`)) {
+      this.reservasService.procesarSolicitudAprobacion(reservas.reservaId)
+        .subscribe({
+          next: () => {
+            alert(`Reserva ${reservas.reservaId} aprobada`);
+            this.getReservas();
+          },
+          error: err => {
+            alert('No supero las condiciones necesarias para aprobacion');
+            console.error('No supero las condiciones necesarias para aprobacion', err);
+          }
+        });
+    }
+  } else {
+    alert('Objeto de reserva no válido o reservaId no está definido');
+    console.error('Invalid reserva object or reservaId is undefined');
+  }
+}
 
 }

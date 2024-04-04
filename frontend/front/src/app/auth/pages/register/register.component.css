@@ -6,6 +6,10 @@
   margin-left: 10px;
 }
 
+.custom-btt{
+  width: 8rem; height: 3rem; margin:5px;
+}
+
 input {
   padding: 2%;
   margin-left: 10px;

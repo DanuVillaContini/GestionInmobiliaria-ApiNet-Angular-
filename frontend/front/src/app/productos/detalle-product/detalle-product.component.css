@@ -20,6 +20,9 @@ section {
 .custom-btt-delete{
   background-color: rgb(211, 131, 131) !important;
 }
+.custom-btt-volver{
+  background-color: rgb(218, 202, 149) !important;
+}
 .example-button-row {
   display: table-cell;
   max-width: 600px;

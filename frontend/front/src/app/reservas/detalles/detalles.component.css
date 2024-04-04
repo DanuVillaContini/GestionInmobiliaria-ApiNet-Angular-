@@ -18,8 +18,9 @@
 .bg-none{
   background-color: transparent !important;
 }
-
-
+.custom-btt-volver{
+  background-color: rgb(218, 202, 149) !important;
+}
 
 table {
   width: 100%;
