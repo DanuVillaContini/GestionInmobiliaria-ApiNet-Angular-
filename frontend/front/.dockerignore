@@ -1,0 +1,12 @@
+node_modules
+dist/
+tmp/
+out-tsc/
+*.bak
+*.swp
+*~
+*.tmp
+*.log
+.angular
+.vscode
+.env
