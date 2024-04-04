@@ -15,6 +15,13 @@
   height: 2rem;
   margin-left: 0.3rem;
 }
+.custom-btt-search{
+  background-color: rgb(149, 193, 218) !important;
+  width: 35%;
+  height: 2.3rem;
+  margin-left: 0.3rem;
+  border: 1px solid rgb(101, 131, 148);
+}
 .bg-none{
   background-color: transparent !important;
 }
@@ -55,3 +62,16 @@ section {
   justify-content: center;
   width: 120px;
 }
+
+.bg-red-pastel {
+  background-color: #e28888;
+}
+.bg-green-pastel {
+  background-color: #88e2bc;
+}
+
+.bg-blue-pastel {
+  background-color: #9f9ffc;
+}
+
+

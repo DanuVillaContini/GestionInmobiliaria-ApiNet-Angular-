@@ -52,13 +52,6 @@ export class ReservasService {
     return this.http.get<IReservas[]>(`${this.url}/filtroxestado/${estadoReservaId}`, { headers });
   }
 
-  getReservasPorUsuario(username: string): Observable<IReservas[]> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.authService.getToken()}`
-    });
-    return this.http.get<IReservas[]>(`${this.url}/filtroxusername/${username}`, { headers });
-  }
-
   addNewReserva(reserva: ICrearReserva): Observable<void> {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.authService.getToken()}`
@@ -79,4 +72,20 @@ export class ReservasService {
     });
     return this.http.post<void>(`${this.url}/Aprobar/${reservaId}`, { headers });
   }
+
+  getReporte(username: string): Observable<any[]> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.authService.getToken()}`
+    });
+
+    let url = `${this.url}/filtroxusername/${username}`;
+
+    if (username.toUpperCase() === 'TODO') {
+      url = `${this.url}/filtroxusername/TODO`;
+    }
+
+    return this.http.get<any>(url, { headers });
+  }
+
+
 }

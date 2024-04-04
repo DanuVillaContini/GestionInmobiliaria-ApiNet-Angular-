@@ -28,3 +28,7 @@ export interface IEstadosReserva{
   estadoId: number;
   nombre: string;
 }
+export interface IReporte{
+  usuario: string;
+  numeroReservas: number;
+}
