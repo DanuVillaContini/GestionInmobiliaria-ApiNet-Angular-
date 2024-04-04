@@ -14,7 +14,7 @@ public interface IReservaRepository
     int UpdateEstadoReserva(int reservaId, ReservaDto reservaDto);
     List<ReservaDto> GetReservasPorEstado(int estadoReservaId);
     void ProcesarSolicitudAprobacion(int reservaId);
-    List<ReservaDto> GetReservasPorUsuario(string username);
+    object GetReservasPorUsuario(string username);
 
 }
 public class ReservaRespository(AppDbContext context) : IReservaRepository
@@ -79,15 +79,23 @@ public class ReservaRespository(AppDbContext context) : IReservaRepository
         return reservas.Adapt<List<ReservaDto>>();
     }
 
-    public List<ReservaDto> GetReservasPorUsuario(string username)
+    public object GetReservasPorUsuario(string username)
     {
-        var reservas = context.Reservas
-            .Where(r => r.Usuario.ToUpper() == username.ToUpper()) // Comparar en mayúsculas
-            .Include(r => r.Producto)
-            .Include(r => r.EstadoReserva)
-            .ToList();
-
-        return reservas.Adapt<List<ReservaDto>>();
+        if (username.ToUpper() == "TODO")
+        {
+            var reservasPorUsuario = context.Reservas
+                .GroupBy(r => r.Usuario)
+                .Select(g => new { Usuario = g.Key, NumeroReservas = g.Count() })
+                .ToList();
+            return reservasPorUsuario;
+        }
+        else
+        {
+            var numeroReservas = context.Reservas
+                .Where(r => r.Usuario.ToUpper() == username.ToUpper())
+                .Count();
+            return numeroReservas;
+        }
     }
 
     public void ProcesarSolicitudAprobacion(int reservaId)
