@@ -64,7 +64,7 @@ namespace Backend.Repository
                     update.SetProperty(entity => entity.Codigo, productoDto.Codigo.ToUpper()) // Convertir a mayúsculas
                           .SetProperty(entity => entity.Barrio, productoDto.Barrio.ToUpper()) // Convertir a mayúsculas
                           .SetProperty(entity => entity.Precio, productoDto.Precio)
-                          .SetProperty(entity => entity.UrlImagen, productoDto.UrlImagen.ToUpper())); // Convertir a mayúsculas
+                          .SetProperty(entity => entity.UrlImagen, productoDto.UrlImagen)); // Convertir a mayúsculas
 
             return rowsAffected;
         }
