@@ -11,6 +11,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatDialog,MatDialogRef, MatDialogActions, MatDialogClose,MatDialogTitle,MatDialogContent} from '@angular/material/dialog';
 import {MatListModule} from '@angular/material/list';
 import { FormsModule } from '@angular/forms';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { FormsModule } from '@angular/forms';
     MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent,
     MatMenuModule,
     MatListModule,
-    FormsModule
+    FormsModule,MatTabsModule,
+    MatFormFieldModule, MatSelectModule, MatInputModule
   ],
   imports: [
     CommonModule,

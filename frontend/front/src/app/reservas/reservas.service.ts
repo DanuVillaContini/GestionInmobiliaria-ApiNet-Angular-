@@ -13,6 +13,7 @@ export class ReservasService {
   private http = inject(HttpClient);
   private authService = inject(AuthService);
   private readonly url = environment.apiUrl + '/Reserva';
+  private readonly url2 = environment.apiUrl + '/estadoReserva';
 
   constructor() { }
 
@@ -21,6 +22,13 @@ export class ReservasService {
       'Authorization': `Bearer ${this.authService.getToken()}`
     });
     return this.http.get<any>(`${this.url}/Producto`, { headers });
+  }
+
+  getEstadosReserva():Observable<any>{
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.authService.getToken()}`
+    });
+    return this.http.get<any>(`${this.url2}/`, { headers });
   }
 
   getReservas(): Observable<IReservas[]> {

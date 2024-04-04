@@ -23,3 +23,8 @@ export interface ICrearReserva{
   usuario: string;
   clienteNombre: string;
 }
+
+export interface IEstadosReserva{
+  estadoId: number;
+  nombre: string;
+}
