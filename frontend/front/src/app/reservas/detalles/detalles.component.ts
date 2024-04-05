@@ -1,8 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ReservasService } from '../reservas.service';
 import { Router } from '@angular/router';
-import { IEstadosReserva, IReporte, IReservas } from '../interface/reserva.interface';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { IEstadosReserva, IReservas } from '../interface/reserva.interface';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-detalles',
@@ -12,22 +12,20 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class DetallesComponent implements OnInit {
   constructor(
     private reservasService: ReservasService,
+    private authService: AuthService,
     private router: Router,
   ) { }
 
   displayedColumns: string[] = ['codigo', 'barrio', 'precio', 'urlImagen', 'estado', 'usuario', 'cliente', 'estadoReserva', 'acciones'];
   reservas: IReservas[] = [];
   estadosReserva: IEstadosReserva[] = [];
+
   estadoSeleccionado: number | null = null;
-  reporte: IReporte[] = [];
-  totalReservasPorVendedor: any[] = [];
-  formSearchReporte!: FormGroup
 
 
   ngOnInit(): void {
     this.getReservas();
     this.getEstadosReserva();
-    this.getReporte();
   }
 
   getReservas(): void {
@@ -88,23 +86,20 @@ export class DetallesComponent implements OnInit {
     }
   }
 
-  getReporte(): void {
-    this.reservasService.getReporte("TODO")
-      .subscribe({
-        next: (reporte: IReporte[] | number) => {
-          if (typeof reporte === 'number') {
-            this.reporte = [{ usuario: "TODO", numeroReservas: reporte }];
-          } else {
-            this.reporte = reporte;
-          }
-        },
-        error: err => {
-          console.log(err);
-        }
-      });
+  showIfRol(): boolean {
+    const currentUser = this.authService.currentUser();
+    if (currentUser) {
+      const allowedRoles = ['ADMIN', 'VENDEDOR'];
+      return allowedRoles.includes(currentUser.role);
+    }
+    return false;
   }
-
-  getMaxReservas(): number {
-    return Math.max(...this.reporte.map(r => r.numeroReservas), 0);
+  showIfRol2(): boolean {
+    const currentUser = this.authService.currentUser();
+    if (currentUser) {
+      const allowedRoles = ['ADMIN', 'COMERCIAL'];
+      return allowedRoles.includes(currentUser.role);
+    }
+    return false;
   }
 }

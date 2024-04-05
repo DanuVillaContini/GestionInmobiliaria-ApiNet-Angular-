@@ -24,14 +24,14 @@ const routes: Routes = [
   {
     path: 'productos',
     canActivate: [authGuard],
-    data:{roles: ['ADMIN']},
+    data:{roles: ['ADMIN', 'VENDEDOR','COMERCIAL']},
     loadChildren: () => import('./productos/productos.module')
     .then(m => m.ProductosModule)
   },
   {
     path: 'reservas',
     canActivate: [authGuard],
-    data:{roles: ['ADMIN']},
+    data:{roles: ['ADMIN', 'VENDEDOR','COMERCIAL']},
     loadChildren: () => import('./reservas/reservas.module')
     .then(m => m.ReservasModule)
   },

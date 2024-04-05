@@ -5,25 +5,37 @@ section {
   display: table;
 }
 
-.example-label {
+/* .example-label {
   display: table-cell;
   font-size: 14px;
   margin-left: 8px;
   min-width: 120px;
-}
+} */
 .custom-btt-crear{
   background-color: rgb(149, 218, 189) !important;
 }
 .custom-btt-edit{
   background-color: rgb(149, 154, 218) !important;
+  width: 40px ;
+  height: 38px ;
+  margin: 0px;
 }
 .custom-btt-delete{
   background-color: rgb(211, 131, 131) !important;
+  width: 40px ;
+  height: 38px ;
+  margin: 0px;
 }
 .custom-btt-volver{
   background-color: rgb(218, 202, 149) !important;
 }
-.example-button-row {
+.custom-imagen{
+  margin-left: 5%;
+  margin-right: 1px;
+  width: 30%;
+  height: 30%;
+}
+/* .example-button-row {
   display: table-cell;
   max-width: 600px;
 }
@@ -42,4 +54,16 @@ section {
   display: flex;
   justify-content: center;
   width: 120px;
+} */
+
+
+.bg-red-pastel {
+  background-color: #e28888;
+}
+.bg-green-pastel {
+  background-color: #88e2bc;
+}
+
+.bg-blue-pastel {
+  background-color: #9f9ffc;
 }

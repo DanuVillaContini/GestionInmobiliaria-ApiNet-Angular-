@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { ProductosService } from '../productos.service';
 import { Producto } from '../interface/producto.interface';
 import { Router } from '@angular/router';
+import { AuthService } from '../../auth/auth.service';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class DetalleProductComponent implements OnInit{
 
-  constructor(private productService: ProductosService, private router: Router) {}
+  constructor(private productService: ProductosService, private router: Router, private authService: AuthService) {}
 
   title: string = 'PRODUCTOS';
   displayedColumns: string[] = ['codigo', 'barrio', 'precio', 'urlImagen', 'estado', 'acciones'];
@@ -47,5 +48,14 @@ export class DetalleProductComponent implements OnInit{
           }
         });
     }
+  }
+
+  showIfRol(): boolean {
+    const currentUser = this.authService.currentUser();
+    if (currentUser) {
+      const allowedRoles = ['ADMIN', 'VENDEDOR'];
+      return allowedRoles.includes(currentUser.role);
+    }
+    return false;
   }
 }

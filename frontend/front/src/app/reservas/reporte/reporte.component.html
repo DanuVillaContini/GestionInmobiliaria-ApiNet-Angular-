@@ -1,0 +1,62 @@
+<div class="container" style="margin-top: 10rem;">
+  <div class="row d-flex flex-column"><br>
+    <div class="col">
+      <div class="example-button-row">
+        <button class="custom-btt-volver" mat-raised-button [routerLink]="['/reservas/detalles']">Volver</button>
+      </div>
+      <h2 class="mt-5">Reporte de Reservas</h2>
+      <hr>
+      <mat-tab-group>
+        <!-- REPORTE -->
+        <mat-tab label="Reporte de Ventas" class="d-flex flex-column justify-content-end">
+          <div class="col-6 mb-3">
+            <h3 class="mb-3"><strong>Grafico comparativo</strong></h3>
+            <hr>
+            <div *ngFor="let r of reporte">
+              <div class="progress mt-2">
+                <div class="progress-bar" role="progressbar"
+                  [ngStyle]="{ 'width.%': (r.numeroReservas / getMaxReservas()) * 100 }"
+                  [attr.aria-valuenow]="r.numeroReservas" aria-valuemin="0" [attr.aria-valuemax]="getMaxReservas()"
+                  [ngClass]="{
+                            'bg-red-pastel': (r.numeroReservas / getMaxReservas()) * 100 < 5,
+                            'bg-green-pastel': (r.numeroReservas / getMaxReservas()) * 100 <= 5 && 100 >= 30,
+                            'bg-blue-pastel': (r.numeroReservas / getMaxReservas()) * 100 >= 30
+                          }"><br>
+                </div>
+              </div>
+              <span>{{ r.usuario }} - {{ r.numeroReservas }} reservas</span>
+            </div>
+
+          </div>
+        </mat-tab>
+
+        <mat-tab label="Estado">
+          <div class="col d-flex justify-content-start ">
+            <mat-form-field [style]="'width: 22rem;'">
+              <mat-label>Seleccione estado</mat-label>
+              <mat-select (selectionChange)="seleccionEstado($event.value)">
+                <mat-option *ngFor="let estado of estadosReserva" [value]="estado.estadoId">
+                  {{estado.nombre}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-list role="list">
+              <mat-list-item *ngFor="let reserva of reservas" role="listitem"
+                style="width: 50rem; margin-bottom: 5px; border-bottom: 2px solid rgb(192, 191, 191);">
+                <span><strong>ID</strong> {{ reserva.reservaId }} - <strong>Code producto:</strong> {{
+                  reserva.producto.codigo }} - </span><br>
+                <span><strong>Barrio</strong> " {{ reserva.producto.barrio }} " - </span>
+                <span><strong>Vendedor/a:</strong> {{ reserva.usuario }} -
+                  <strong>Cliente:</strong> {{ reserva.clienteNombre }} </span><br>
+              </mat-list-item>
+            </mat-list>
+          </div>
+        </mat-tab>
+
+      </mat-tab-group>
+    </div>
+  </div>
+</div>
+

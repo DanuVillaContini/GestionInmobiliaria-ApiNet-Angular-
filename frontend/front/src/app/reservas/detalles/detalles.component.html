@@ -1,7 +1,7 @@
-<div class="container d-flex justify-content-center">
+<div class="container d-flex justify-content-center" style="margin-top: 10rem;">
   <div class="row">
     <div class="col">
-      <h1><strong>RESERVAS</strong></h1><br>
+      <h1><strong>RESERVAS</strong></h1><hr><br>
       <h2>Detalles</h2>
       <hr>
     </div>
@@ -10,7 +10,7 @@
       <div class="container">
         <div class="row d-flex justify-content-end">
           <div class="col-6 d-flex justify-content-end">
-            <button class="custom-btt-crear" [ngStyle]="{ 'height': '2.5rem', 'width': '6rem'}" mat-raised-button
+            <button *ngIf="showIfRol()" class="custom-btt-crear" [ngStyle]="{ 'height': '2.5rem', 'width': '6rem'}" mat-raised-button
               [routerLink]="['/reservas/nuevo']"><strong>NUEVO</strong><mat-icon>plus_one</mat-icon></button>
           </div>
         </div>
@@ -36,11 +36,16 @@
           </ng-container>
           <ng-container matColumnDef="urlImagen">
             <th mat-header-cell *matHeaderCellDef> Imagen </th>
-            <td mat-cell *matCellDef="let element"> <img [src]="element.producto.urlImagen" alt="Imagen"> </td>
+            <td mat-cell *matCellDef="let element"><mat-icon>photo_camera</mat-icon> <img
+                [src]="element.producto.urlImagen" alt="" class="custom-imagen"> </td>
           </ng-container>
           <ng-container matColumnDef="estado">
             <th mat-header-cell *matHeaderCellDef> Estado del Producto</th>
-            <td mat-cell *matCellDef="let element"> {{element.producto.estado}} </td>
+            <td mat-cell *matCellDef="let element" [ngClass]="{
+              'txt-color-red': (element.producto.estado =='VENDIDO'),
+            'txt-color-green':(element.producto.estado =='DISPONIBLE'),
+            'txt-color-blue':(element.producto.estado =='RESERVADO')
+            }"> {{element.producto.estado}} </td>
           </ng-container>
 
           <ng-container matColumnDef="usuario">
@@ -53,7 +58,11 @@
           </ng-container>
           <ng-container matColumnDef="estadoReserva">
             <th mat-header-cell *matHeaderCellDef> Estado de la Reserva </th>
-            <td mat-cell *matCellDef="let element"> {{element.estadoReserva.nombre}} </td>
+            <td mat-cell *matCellDef="let element" [ngClass]="{
+              'bg-red-pastel': (element.estadoReserva.nombre == 'CANCELADA' || element.estadoReserva.nombre == 'RECHAZADA'),
+              'bg-green-pastel': (element.estadoReserva.nombre == 'APROBADA'),
+              'bg-blue-pastel': (element.estadoReserva.nombre == 'INGRESADA')
+            }"> {{element.estadoReserva.nombre}} </td>
           </ng-container>
 
           <!-- ACCIONES  -->
@@ -86,60 +95,15 @@
     <!-- FILTRO POR ESTADO  -->
     <div class="row d-flex flex-column"><br>
       <div class="col">
-        <h2 class="mt-5">Filtrar</h2>
+        <h2 class="mt-5">Ver Reportes de reservas</h2>
         <hr>
-        <mat-tab-group>
-          <mat-tab label="Estado">
-            <div class="col d-flex justify-content-start ">
-              <mat-form-field [style]="'width: 22rem;'">
-                <mat-label>Seleccione estado</mat-label>
-                <mat-select (selectionChange)="seleccionEstado($event.value)">
-                  <mat-option *ngFor="let estado of estadosReserva" [value]="estado.estadoId">
-                    {{estado.nombre}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-            <div class="col">
-              <mat-list role="list">
-                <mat-list-item *ngFor="let reserva of reservas" role="listitem"
-                  style="width: 50rem; margin-bottom: 5px; border-bottom: 2px solid rgb(192, 191, 191);">
-                  <span><strong>ID</strong> {{ reserva.reservaId }} - <strong>Code producto:</strong> {{
-                    reserva.producto.codigo }} - </span><br>
-                  <span><strong>Barrio</strong> " {{ reserva.producto.barrio }} " - </span>
-                  <span><strong>Vendedor/a:</strong> {{ reserva.usuario }} -
-                    <strong>Cliente:</strong> {{ reserva.clienteNombre }} </span><br>
-                </mat-list-item>
-              </mat-list>
-            </div>
-          </mat-tab>
-
-          <!-- REPORTE -->
-          <mat-tab label="Reporte de Ventas" class="d-flex flex-column justify-content-end">
-            <div class="col-6 mb-3">
-              <h3 class="mb-3"><strong>Grafico comparativo</strong></h3><hr>
-              <div *ngFor="let r of reporte">
-                <div class="progress mt-2">
-                  <div class="progress-bar" role="progressbar"
-                    [ngStyle]="{ 'width.%': (r.numeroReservas / getMaxReservas()) * 100 }"
-                    [attr.aria-valuenow]="r.numeroReservas" aria-valuemin="0" [attr.aria-valuemax]="getMaxReservas()"
-                    [ngClass]="{
-                      'bg-red-pastel': (r.numeroReservas / getMaxReservas()) * 100 < 5,
-                      'bg-green-pastel': (r.numeroReservas / getMaxReservas()) * 100 <= 5 && 100 >= 30,
-                      'bg-blue-pastel': (r.numeroReservas / getMaxReservas()) * 100 >= 30
-                    }"><br>
-                  </div>
-                </div>
-                <span>{{ r.usuario }} - {{ r.numeroReservas }} reservas</span>
-              </div>
-
-            </div>
-          </mat-tab>
-
-        </mat-tab-group>
-
       </div>
-
+      <div class="col-6 d-flex justify-content-start">
+        <button *ngIf="showIfRol2()" class="custom-btt-volver" [ngStyle]="{ 'height': '2.5rem', 'width': '6rem'}"
+          mat-raised-button
+          [routerLink]="['/reservas/reporte']"><strong>Ir</strong><mat-icon>drive_file_move</mat-icon></button>
+        <span *ngIf="!showIfRol2()">No disponible por falta de acceso. <mat-icon class="m-1">desktop_access_disabled</mat-icon></span>
+      </div>
     </div>
   </div>
 </div>

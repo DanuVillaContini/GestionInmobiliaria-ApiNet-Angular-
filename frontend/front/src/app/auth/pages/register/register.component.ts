@@ -37,7 +37,7 @@ export class RegisterComponent {
   }
 
   register() {
-    const {username, password, role} = this.myFormRegister.value;
+    const { username, password, role } = this.myFormRegister.value;
 
     const newUser: InterfaceUserRegister = {
       username: username,
@@ -46,16 +46,14 @@ export class RegisterComponent {
     }
 
     this.authService.register(newUser).subscribe({
-      next: res =>{
-        console.log(res);
+      next: res => {
+        console.log(newUser);
+        alert('Registro exitoso');
+        this.router.navigateByUrl('/auth/login');
       },
-      error: err =>{
+      error: err => {
         console.log(err);
       }
-
-    //       console.log(newUsuario)
-    // // Redirect:
-    // this.router.navigateByUrl('/auth/login')
     })
   }
 }

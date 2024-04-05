@@ -6,6 +6,7 @@ import { MaterialModule } from '../shared/material/material.module';
 import { ReservasRoutingModule } from './reservas-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UpdateEstadoComponent } from './update-estado/update-estado.component';
+import { ReporteComponent } from './reporte/reporte.component';
 
 
 
@@ -13,7 +14,8 @@ import { UpdateEstadoComponent } from './update-estado/update-estado.component';
   declarations: [
     DetallesComponent,
     CrearComponent,
-    UpdateEstadoComponent
+    UpdateEstadoComponent,
+    ReporteComponent
   ],
   imports: [
     CommonModule,

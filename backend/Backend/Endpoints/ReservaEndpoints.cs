@@ -20,7 +20,7 @@ namespace Backend.Endpoints
 
                 return Results.Ok(r);
 
-            }).WithTags("Reservas").RequireAuthorization(new AuthorizeAttribute { Roles = "COMERCIAL, ADMIN" });
+            }).WithTags("Reservas").RequireAuthorization(new AuthorizeAttribute { Roles = "VENDEDOR, COMERCIAL, ADMIN" });
 
             //---GET-ID---
             app.MapGet("/{reservaId:int}", (IReservaService reservaService, int reservaId) =>
@@ -28,7 +28,7 @@ namespace Backend.Endpoints
                 var rID = reservaService.GetReservaId(reservaId);
 
                 return Results.Ok(rID);
-            }).WithTags("Reservas").RequireAuthorization(new AuthorizeAttribute { Roles = "COMERCIAL, ADMIN" });
+            }).WithTags("Reservas").RequireAuthorization(new AuthorizeAttribute { Roles = "VENDEDOR, COMERCIAL, ADMIN" });
 
             //---GET-Filtradas-por-estado-de-reservas---
             app.MapGet("/filtroxestado/{estadoReservaId:int}", (IReservaService reservaService, int estadoReservaId) =>

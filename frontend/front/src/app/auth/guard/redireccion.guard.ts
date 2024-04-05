@@ -15,10 +15,11 @@ export const redireccionGuard: CanActivateFn = (route, state) => {
     router.navigateByUrl('/home')
     return true;
   } else if (currentRol === 'ADMIN') {
-    router.navigateByUrl('/productos')
+    router.navigateByUrl('/home')
     return true;
   } else if (currentRol === 'VENDEDOR') {
     router.navigateByUrl('/home')
+    // router.navigateByUrl('/productos')
     return true;
   }
 
