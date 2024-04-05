@@ -77,12 +77,15 @@
                   <mat-icon>help_center</mat-icon>
                   <span>Check Aprobacion Directa</span>
                 </button>
-                <button mat-menu-item [routerLink]="['/reservas/updateestado',element]">
+                <button *ngIf="showIfRol2()" mat-menu-item [routerLink]="['/reservas/updateestado',element]">
                   <mat-icon>settings</mat-icon>
                   <span>Cambiar Estado Reserva</span>
                 </button>
+                <button *ngIf="showIfRol()" mat-menu-item (click)="cancelarReserva(element)">
+                  <mat-icon>cancel</mat-icon>
+                  <span>Cancelar Reserva</span>
+                </button>
               </mat-menu>
-
             </td>
           </ng-container>
 

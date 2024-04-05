@@ -3,6 +3,7 @@ import { IEstadosReserva } from '../interface/reserva.interface';
 import { ReservasService } from '../reservas.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-update-estado',
@@ -14,7 +15,9 @@ export class UpdateEstadoComponent implements OnInit{
   constructor(private route: ActivatedRoute,
     private reservasService: ReservasService,
     private router: Router,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder,
+    private authService: AuthService,
+  ) { }
 
   reservaForm!: FormGroup;
   estadosReserva: IEstadosReserva[] = [];
@@ -80,4 +83,29 @@ export class UpdateEstadoComponent implements OnInit{
         });
     }
   }
+
+  cancelarReserva() {
+    this.reservasService.updateEstadoReserva(this.reservaId, 3)
+      .subscribe({
+        next: () => {
+          alert('La reserva ha sido cancelada correctamente');
+          this.router.navigate(['/reservas/detalles']);
+        },
+        error: err => {
+          console.error(err);
+          alert('Hubo un error al cancelar la reserva');
+        }
+      });
+  }
+
+
+  showIfRol(): boolean {
+    const currentUser = this.authService.currentUser();
+    if (currentUser) {
+      const allowedRoles = ['VENDEDOR'];
+      return allowedRoles.includes(currentUser.role);
+    }
+    return false;
+  }
+
 }

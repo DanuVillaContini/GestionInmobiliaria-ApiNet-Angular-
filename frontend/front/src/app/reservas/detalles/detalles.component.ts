@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ReservasService } from '../reservas.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IEstadosReserva, IReservas } from '../interface/reserva.interface';
 import { AuthService } from '../../auth/auth.service';
 
@@ -14,6 +14,7 @@ export class DetallesComponent implements OnInit {
     private reservasService: ReservasService,
     private authService: AuthService,
     private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   displayedColumns: string[] = ['codigo', 'barrio', 'precio', 'urlImagen', 'estado', 'usuario', 'cliente', 'estadoReserva', 'acciones'];
@@ -83,6 +84,14 @@ export class DetallesComponent implements OnInit {
     } else {
       alert('Objeto de reserva no válido o reservaId no está definido');
       console.error('Invalid reserva object or reservaId is undefined');
+    }
+  }
+
+  cancelarReserva(element: IReservas): void {
+    if (element.estadoReserva.nombre === 'INGRESADA') {
+      this.router.navigate(['/reservas/updateestado', element]);
+    } else {
+      alert('Acción no permitida, debe ser una reserva ingresada');
     }
   }
 
